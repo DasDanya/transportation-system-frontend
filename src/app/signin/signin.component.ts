@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { SigninInfo } from '../auth/signin-info';
-
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signin',
@@ -42,14 +42,14 @@ export class SigninComponent {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
         this.reloadPage();
+        
+        this.errorMessage = '';
       },
-      error => {
-        this.errorMessage = error.message;
+      (error: HttpErrorResponse) => {
+        var errorStatus = error.status;
         this.isLoginFailed = true;
 
-        if(this.errorMessage.startsWith("Http failure response for") && this.errorMessage.includes("401 OK")){
-          this.errorMessage = "неверный логин или пароль";
-        }
+        errorStatus == 401 ? this.errorMessage = "неверный логин или пароль" : this.errorMessage  = error.error.message;
       }
     );
   }

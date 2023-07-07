@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { AddResponsibleComponent } from './responsible/add-responsible/add-responsible.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SignupComponent } from './signup/signup.component';
     SigninComponent,
     HomeComponent,
     SignupComponent,
+    AddResponsibleComponent,
   ],
   imports: [
     BrowserModule,

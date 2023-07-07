@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { SignupInfo } from '../auth/signup-info';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -35,14 +36,13 @@ export class SignupComponent implements OnInit {
       this.authService.signUp(signupInfo).subscribe(
         data => {
           this.isSignedUp = true;
+          this.errorMessage = '';
         },
-        error => {
-          this.errorMessage = error.message;
+        (error: HttpErrorResponse) => {
+          this.errorMessage = error.error.message;
           this.isSignUpFailed = true;
-
-          if(this.errorMessage.startsWith("Http failure response for") && this.errorMessage.includes("400 OK")){
-            this.errorMessage = "Введенный логин(почта) уже используется в системе";
-          }
+          
+          //errorStatus == 400 ? this.errorMessage = "Введенный логин(почта) уже используется в системе" : this.errorMessage = error.message;
         }
       );
     }
