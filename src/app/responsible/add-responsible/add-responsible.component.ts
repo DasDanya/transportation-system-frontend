@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Responsible } from '../responsible';
 import { ResponsibleService } from '../responsible.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { NgModel } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-responsible',
@@ -17,21 +16,16 @@ export class AddResponsibleComponent implements OnInit {
   errorMessage = '';
   selectedFile:File;
 
-  constructor(private responsibleService: ResponsibleService){}
+  constructor(private responsibleService: ResponsibleService,private router: Router){}
 
   ngOnInit(): void {
       
   }
 
   public onFileChanged(event:any) {
-    //Select File
     this.selectedFile = event.target.files[0];
   }
-  // check(fileEvent: HTMLInputElement){
-  //   if(fileEvent != null){
-  //     this.file = fileEvent?.files[0];
-  //   }
-  // }
+
 
   onSubmit(){
       const responsible = new Responsible(
@@ -51,6 +45,8 @@ export class AddResponsibleComponent implements OnInit {
         (data : Response) =>{
         this.isAdded = true;
         this.errorMessage = '';
+
+        this.router.navigate(["responsible/all"]);
       },
       (error: HttpErrorResponse) =>{
         //var errorStatus = error.status;

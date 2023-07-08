@@ -8,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
   form: any = {};
   //signupInfo: SignupInfo;
@@ -17,8 +17,6 @@ export class SignupComponent implements OnInit {
   errorMessage = '';
 
   constructor(private authService: AuthService) { }
-
-  ngOnInit() { }
 
   onSubmit() {
 

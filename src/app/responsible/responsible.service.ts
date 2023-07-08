@@ -18,11 +18,18 @@ export class ResponsibleService{
 
     constructor(private http: HttpClient) {}
 
-    public getResponsibles(): Observable<Responsible[]>{
-        return this.http.get<Responsible[]>(`${this.apiServerUrl}/responsible/all`);
+    public getResponsibles(): Observable<any>{
+        return this.http.get<any>(`${this.apiServerUrl}/responsible/all`);
     }
 
+    public deleteResponsibleGet(id:number): Observable<any>{
+        return this.http.get<any>(`${this.apiServerUrl}/responsible/delete/${id}`);
+    }
     
+    public deleteResponsible(id:number):Observable<any>{
+        return this.http.delete<any>(`${this.apiServerUrl}/responsible/delete/${id}`);
+    }
+
     public addResponsible(responsible: FormData): Observable<any>{
         return this.http.post<any>(`${this.apiServerUrl}/responsible/add`, responsible);
     }

@@ -1,0 +1,32 @@
+<div *ngIf="receivingError; else showResponsibles" class="errorMessage">
+    {{errorMessage}}
+</div>
+
+<ng-template #showResponsibles>
+    <h2 style="margin-top: 15px;">Список ответственных</h2>
+    <a class="btn btn-primary" href="responsible/add" style="margin-top: 10px;">Добавить</a>
+    <table class="table" style="margin-top: 20px;">
+        <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Номер телефона</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let responsible of responsibles">
+                <!-- <td><img src="data:image/jpeg;base64,{{responsible?.photo}}" alt="Фото отвественного" style="height: 70px; width: 70px;"></td> -->
+                <td>{{responsible?.surname}}</td>
+                <td>{{responsible?.name}}</td>
+                <td>{{responsible?.patronymic}}</td>
+                <td>{{responsible?.phone}}</td>
+                <td>
+                    <a><img src="assets/images/change.ico" alt="Изменение" class="smallIcon"></a>
+                    <a href="responsible/delete/{{responsible?.id}}"><img src="assets/images/delete.ico" alt="Удаление" class="smallIcon"></a>
+                    <a><img src="assets/images/show.ico" alt="Удаление" class="smallIcon"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</ng-template>

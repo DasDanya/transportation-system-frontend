@@ -10,6 +10,8 @@ import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { AddResponsibleComponent } from './responsible/add-responsible/add-responsible.component';
+import { AllResponsibleComponent } from './responsible/all-responsible/all-responsible.component';
+import { DeleteResponsibleComponent } from './responsible/delete-responsible/delete-responsible.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { AddResponsibleComponent } from './responsible/add-responsible/add-respo
     HomeComponent,
     SignupComponent,
     AddResponsibleComponent,
+    AllResponsibleComponent,
+    DeleteResponsibleComponent,
   ],
   imports: [
     BrowserModule,

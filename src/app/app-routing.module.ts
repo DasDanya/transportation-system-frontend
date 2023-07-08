@@ -5,6 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import {AddResponsibleComponent} from './responsible/add-responsible/add-responsible.component';
+import { AllResponsibleComponent } from './responsible/all-responsible/all-responsible.component';
+import { DeleteResponsibleComponent } from './responsible/delete-responsible/delete-responsible.component';
 
 const routes: Routes = [
   {
@@ -22,7 +24,16 @@ const routes: Routes = [
   {
     path:'responsible/add',
     component: AddResponsibleComponent
+  },
+  {
+    path: 'responsible/all',
+    component: AllResponsibleComponent
+  },
+  {
+    path: 'responsible/delete/:id',
+    component: DeleteResponsibleComponent
   }
+  
 ];
 
 @NgModule({

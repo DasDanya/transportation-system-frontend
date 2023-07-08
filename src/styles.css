@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+
+.errorMessage{
+  top:30%;
+  left: 50%;
+  transform: translate3d(-50%,-50%, 0);
+  position: absolute;
+  color:red;
+  font-size: 24px;
+}
+
+.smallIcon{
+  height: 30px;
+  width: 30px;
+  /* background-color: red; */
+  margin-right: 15px;
+}
