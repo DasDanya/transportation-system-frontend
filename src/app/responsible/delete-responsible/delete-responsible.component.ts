@@ -35,8 +35,8 @@ export class DeleteResponsibleComponent implements OnInit {
     )
   }
 
-  onSubmit(id:number){
-    this.responsibleService.deleteResponsible(id).subscribe(
+  onSubmit(){
+    this.responsibleService.deleteResponsible(this.responsible.id).subscribe(
       (response:Responsible) => {
         this.resetError();
 

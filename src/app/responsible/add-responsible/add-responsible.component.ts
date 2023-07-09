@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class AddResponsibleComponent implements OnInit {
   form: any = {};
   failInAdd = false;
-  isAdded = false;
   errorMessage = '';
   selectedFile:File;
 
@@ -35,6 +34,7 @@ export class AddResponsibleComponent implements OnInit {
       this.form.phone
     );
     
+  
     const responsibleWithPhoto = new FormData();
     //const userBlob = new Blob(JSON.stringify(this.responsible),{ type: "application/json"});
     const responsibleBlob = new Blob([JSON.stringify(responsible)], {type: "application/json"});
@@ -42,10 +42,10 @@ export class AddResponsibleComponent implements OnInit {
     responsibleWithPhoto.append('photo', this.selectedFile);
 
     this.responsibleService.addResponsible(responsibleWithPhoto).subscribe(
-        (data : Response) =>{
-        this.isAdded = true;
+        (data : any) =>{
         this.errorMessage = '';
-
+        this.failInAdd = false;
+        
         this.router.navigate(["responsible/all"]);
       },
       (error: HttpErrorResponse) =>{

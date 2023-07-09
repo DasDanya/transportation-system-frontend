@@ -1,0 +1,63 @@
+<h2 style="margin-top: 15px;">Изменение данных об ответственном</h2>
+<hr/>
+
+<div style="display: flex;">
+    <div class="col-md-5">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="surname" class="form-label">Фамилия</label>
+              <input type="text" class="form-control" value="{{responsible.surname}}" name="surname" [(ngModel)]="form.surname" #surname="ngModel" required maxlength="30" pattern="^[А-Яа-я]+$"/>
+              <div *ngIf="f.submitted && surname.invalid">
+                <span *ngIf="surname?.errors?.['required']" class="text-danger">Необходимо ввести фамилию ответственного</span>
+                <span *ngIf="surname?.errors?.['pattern']" class="text-danger">Фамилия должна состоять из русских букв</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:10px;">
+              <label for="name" class="form-label">Имя</label>
+              <input type="text" class="form-control" value="{{responsible.name}}" name="name" [(ngModel)]="form.name" #name="ngModel" required maxlength="20" pattern="^[А-Яа-я]+$"/>
+              <div *ngIf="f.submitted && name.invalid">
+                <span *ngIf="name?.errors?.['required']" class="text-danger">Необходимо ввести имя ответственного</span>
+                <span *ngIf="name?.errors?.['pattern']" class="text-danger">Имя должно состоять из русских букв</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:10px;">
+              <label for="patronymic" class="form-label">Отчество</label>
+              <input type="text" class="form-control"  name="patronymic" [(ngModel)]="form.patronymic" #patronymic="ngModel" maxlength="30" pattern="^[А-Яа-я]*$"/>
+              <div *ngIf="f.submitted && name.invalid">
+                <span *ngIf="patronymic?.errors?.['pattern']" class="text-danger">Отчество должно состоять из русских букв</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:10px;">
+              <label for="phone" class="form-label">Номер телефона</label>
+              <input type="text" class="form-control" value="{{responsible.phone}}" name="phone" [(ngModel)]="form.phone" #phone="ngModel" required pattern="^\+7-\d{3}-\d{3}-\d{2}-\d{2}" placeholder="+7-111-111-11-11"/>
+              <div *ngIf="f.submitted && phone.invalid">
+                <span *ngIf="phone?.errors?.['required']" class="text-danger">Необходимо номер телефона ответственного</span>
+                <span *ngIf="phone?.errors?.['pattern']" class="text-danger">Некорректный ввод. Пример: +7-111-111-11-11</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+              <label for="photo" class="form-label">Фотография</label>
+              <!-- <input type="checkbox" (change)="changeDisabledFile()" class="form-check-input" id="checkbox">
+              <label class="form-check-label" for="checkbox" style="margin-left:5px;">Изменить фото</label> -->
+              <input type="file" id="photo" (change)="onFileChanged($event)" class="form-control" name="photo" [(ngModel)]="form.photo" #photo="ngModel" accept=".bmp, .png, .jpeg, .jpg">
+              <div *ngIf="f.submitted && photo.invalid">
+                  <span *ngIf="photo?.errors?.['required']" class="text-danger">Необходимо выбрать фотографию ответственного</span>
+                  <span *ngIf="photo?.errors?.['accept']" class="text-danger">Поддерживаются следующие форматы: .bmp, .png, .jpeg, .jpg</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
+              <button class="btn btn-primary w-100" style="height:50px;">Изменить</button>
+              <div *ngIf="f.submitted && error" class="text-danger" style="margin-top: 10px;">Ошибка изменения данных: {{errorMessage}}
+              </div>
+            </div>
+          </form>
+
+          <a href="responsible/all">Вернуться к списку ответственных</a>
+    </div>
+    <div>
+        <div class="mt-2" style="width: 100%; margin-left: 150px;">
+            <img src="data:image/jpeg;base64,{{responsible.photo}}" alt="Фото отвественного" id = "res_img">
+        </div>
+    </div>
+</div>
+

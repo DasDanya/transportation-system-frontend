@@ -7,6 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 import {AddResponsibleComponent} from './responsible/add-responsible/add-responsible.component';
 import { AllResponsibleComponent } from './responsible/all-responsible/all-responsible.component';
 import { DeleteResponsibleComponent } from './responsible/delete-responsible/delete-responsible.component';
+import { UpdateResponsibleComponent } from './responsible/update-responsible/update-responsible.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'responsible/delete/:id',
     component: DeleteResponsibleComponent
+  },
+  {
+    path: 'responsible/update/:id',
+    component: UpdateResponsibleComponent
   }
   
 ];
