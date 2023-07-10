@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Responsible } from '../responsible';
 import { ResponsibleService } from '../responsible.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-responsible',
@@ -10,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AllResponsibleComponent implements OnInit {
 
+  form: any = {};
   errorMessage = '';
   receivingError = false;
   responsibles: Responsible[];
@@ -17,7 +19,7 @@ export class AllResponsibleComponent implements OnInit {
   constructor(private responsibleService: ResponsibleService){}
 
   ngOnInit(): void {
-      this.getResponsibles();
+    this.getResponsibles();
   }
 
   getResponsibles(): void{
@@ -25,13 +27,34 @@ export class AllResponsibleComponent implements OnInit {
       (response: Responsible[]) =>{
         this.responsibles = response;
         
-        this.errorMessage = '';
-        this.receivingError = false;
+        this.resetError();
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = error.error.message;
-        this.receivingError = true;
+        this.setError(error);
       }
     )
+  }
+
+  searchResponsibles(): void{
+    this.responsibleService.searchResponsibles(this.form.field,this.form.searchValue).subscribe(
+      (response: Responsible[]) =>{
+        this.responsibles = response;
+        
+       this.resetError();
+      },
+      (error: HttpErrorResponse) => {
+        this.setError(error);
+      }
+    )
+  }
+
+  private setError(error:HttpErrorResponse){
+    this.errorMessage = error.error.message;
+    this.receivingError = true;
+  }
+
+  private resetError(){
+    this.receivingError = false;
+    this.errorMessage = '';
   }
 }

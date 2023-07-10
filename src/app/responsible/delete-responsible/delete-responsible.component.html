@@ -1,35 +1,40 @@
+<div *ngIf="error; else showResponsible" class="errorMessage">
+    {{errorMessage}}
+</div>
 
-<h2 style="margin-top: 15px;">Удаление отвественного</h2>
-    
-<h4>Вы уверены, что хотите удалить этого отвественного?</h4>
-<hr/>
+<ng-template #showResponsible>
+    <h2 style="margin-top: 15px;">Удаление отвественного</h2>
+        
+    <h4>Вы уверены, что хотите удалить этого отвественного?</h4>
+    <hr/>
 
-<div style="display: flex;">
-    <div>
-        <div style="width: 100%;">
-            <img src="data:image/jpeg;base64,{{responsible.photo}}" alt="Фото отвественного" id = "res_img">
+    <div style="display: flex;">
+        <div>
+            <div style="width: 100%;">
+                <img src="data:image/jpeg;base64,{{responsible.photo}}" alt="Фото отвественного" id = "res_img">
+            </div>
+        </div>
+        <div>
+            <dl class="row" style="margin-left:30px;">
+                <dt class="col-sm-3">Фамилия:</dt>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">{{responsible.surname}}</dd>
+
+                <dt class="col-sm-3">Имя:</dt>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">{{responsible.name}}</dd>
+
+                <dt class="col-sm-3">Отчество:</dt>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">{{responsible.patronymic}}</dd>
+
+                <dt class="col-sm-3">Номер телефона:</dt>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">{{responsible.phone}}</dd>
+
+                <form name = "form" (ngSubmit)="onSubmit()" style="margin-bottom: 10px;">
+                    <!-- <input type="hidden" name="id" [(ngModel)]="form.id">  -->
+                    <button class="btn btn-danger" style="width:340px;">Удалить</button>
+                </form>
+
+                <a href="responsible/all">Вернуться к списку ответственных</a>
+            </dl>
         </div>
     </div>
-    <div>
-        <dl class="row" style="margin-left:30px;">
-            <dt class="col-sm-3">Фамилия:</dt>
-            <dd class="col-sm-7" style="margin-bottom: 20px;">{{responsible.surname}}</dd>
-
-            <dt class="col-sm-3">Имя:</dt>
-            <dd class="col-sm-7" style="margin-bottom: 20px;">{{responsible.name}}</dd>
-
-            <dt class="col-sm-3">Отчество:</dt>
-            <dd class="col-sm-7" style="margin-bottom: 20px;">{{responsible.patronymic}}</dd>
-
-            <dt class="col-sm-3">Номер телефона:</dt>
-            <dd class="col-sm-7" style="margin-bottom: 20px;">{{responsible.phone}}</dd>
-
-            <form name = "form" (ngSubmit)="onSubmit()" style="margin-bottom: 10px;">
-                <!-- <input type="hidden" name="id" [(ngModel)]="form.id">  -->
-                <button class="btn btn-danger" style="width:340px;">Удалить</button>
-            </form>
-
-            <a href="responsible/all">Вернуться к списку ответственных</a>
-        </dl>
-    </div>
-</div>
+</ng-template>

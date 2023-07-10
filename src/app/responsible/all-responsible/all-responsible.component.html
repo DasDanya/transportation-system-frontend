@@ -5,7 +5,47 @@
 <ng-template #showResponsibles>
     <h2 style="margin-top: 15px;">Список ответственных</h2>
     <a class="btn btn-primary" href="responsible/add" style="margin-top: 10px;">Добавить</a>
-    <table class="table" style="margin-top: 20px;">
+
+    <div class="info" style="margin-top:10px">
+        <input id="info__body_1" class="info__switch" type="checkbox">
+        <label for="info__body_1" class="info__headline">Поиск ответственных</label>
+        <div class="info__body">
+            <form name="form" (ngSubmit)="f.form.valid && searchResponsibles()" #f="ngForm">
+                <div class="d-flex">   
+                    <div class="d-inline-block">
+                        <label>Параметр:</label>
+                    </div>
+                    <div class="d-inline-block" style="width: 300px; margin-left: 10px;">
+                        <select class="form-select" name="field" [(ngModel)]="form.field" #field="ngModel" required> 
+                            <option value = "surname">Фамилия</option>
+                            <option value = "name">Имя</option>
+                            <option value = "patronymic">Отчество</option>
+                            <option value = "phone">Номер телефона</option>
+                        </select>
+                    </div>
+                    <div class="d-inline-block" style="margin-left:30px;">
+                        <label>Данные: </label>
+                    </div>
+                    <div class="d-inline-block" style="width:300px; margin-left:10px;">
+                        <input type="text" name="searchValue" class="form-control" name="searchValue" [(ngModel)]="form.searchValue" #searchValue="ngModel" required>
+                    </div>
+                    <div class="d-inline-block" style="margin-left:30px;">
+                        <button class="btn btn-primary" style="width: 200px;">Найти</button>
+                    </div>
+                    <div class="d-inline-block" style="margin-left:30px;">
+                        <a href="responsible/all" class="btn btn-primary" style="width: 200px;">Сбросить</a>
+                    </div>
+                </div>
+                <div class="" *ngIf="f.submitted && (field.invalid || searchValue.invalid)">
+                    <span *ngIf="field?.errors?.['required']" class="text-danger" style="margin-left:85px;">Необходимо выбрать параметр поиска</span>
+                    <span *ngIf="field.invalid && searchValue?.errors?.['required']" class="text-danger" style="margin-left:115px;">Необходимо ввести данные для поиска</span>
+                    <span *ngIf="field.valid && searchValue?.errors?.['required']" class="text-danger" style="margin-left:490px;">Необходимо ввести данные для поиска</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <table class="table" *ngIf="responsibles.length !== 0; else zeroResponsibles">
         <thead>
             <tr>
                 <th>Фамилия</th>
@@ -29,4 +69,7 @@
             </tr>
         </tbody>
     </table>
+    <ng-template #zeroResponsibles>
+        <div class="errorMessage">Не было найдено ни одного ответственного</div>
+    </ng-template>
 </ng-template>

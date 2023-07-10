@@ -1,6 +1,6 @@
 
 .errorMessage{
-  top:30%;
+  top:50%;
   left: 50%;
   transform: translate3d(-50%,-50%, 0);
   position: absolute;
@@ -26,4 +26,53 @@
 
 a{
   text-decoration: none;
+}
+
+
+
+.info {
+  padding: 10px 25px;
+}
+
+.info__switch {
+  display: none;
+}
+
+.info__body {
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.4s;
+}
+
+.info__switch:checked ~ .info__body {
+  max-height: 1000px;
+}
+
+.info__headline::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 4px;
+  border: 6px solid #39739d;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+}
+
+.info__switch:checked ~ .info__headline::before {
+  transform: rotate(180deg) translateY(6px);
+}
+
+.info__headline {
+  display: block;
+  position: relative;
+  margin-bottom: 15px;
+  user-select: none;
+  font-weight: normal;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.info__headline:hover {
+      text-decoration: underline;
 }
