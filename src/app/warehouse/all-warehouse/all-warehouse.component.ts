@@ -47,7 +47,16 @@ export class AllWarehouseComponent implements OnInit {
   }
 
   searchWarehouses(){
-
+    this.warehouseService.searchWarehouses(this.form.field,this.form.searchValue).subscribe(
+      (response: Warehouse[]) =>{
+        this.warehouses = response;
+        
+       this.resetError();
+      },
+      (error: HttpErrorResponse) => {
+        this.setError(error);
+      }
+    )
   }
 
 

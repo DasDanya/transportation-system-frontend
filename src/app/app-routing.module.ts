@@ -10,6 +10,8 @@ import { DeleteResponsibleComponent } from './responsible/delete-responsible/del
 import { UpdateResponsibleComponent } from './responsible/update-responsible/update-responsible.component';
 import { AddWarehouseComponent } from './warehouse/add-warehouse/add-warehouse.component';
 import { AllWarehouseComponent } from './warehouse/all-warehouse/all-warehouse.component';
+import { DeleteWarehouseComponent } from './warehouse/delete-warehouse/delete-warehouse.component';
+import { UpdateWarehouseComponent } from './warehouse/update-warehouse/update-warehouse.component';
 
 const routes: Routes = [
   {
@@ -47,6 +49,14 @@ const routes: Routes = [
   {
     path: 'warehouse/all',
     component: AllWarehouseComponent
+  },
+  {
+    path: 'warehouse/delete/:id',
+    component: DeleteWarehouseComponent
+  },
+  {
+    path: 'warehouse/update/:id',
+    component: UpdateWarehouseComponent
   }
   
 ];

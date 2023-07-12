@@ -24,4 +24,20 @@ export class WarehouseService{
     public getWarehouses():Observable<any>{
         return this.http.get<any>(`${this.apiServerUrl}/warehouse/all`);
     } 
+
+    public deleteWarehouseGet(id:number): Observable<any>{
+        return this.http.get<any>(`${this.apiServerUrl}/warehouse/delete/${id}`);
+    }
+
+    public deleteWarehouse(id:number):Observable<any>{
+        return this.http.delete<any>(`${this.apiServerUrl}/warehouse/delete/${id}`);
+    }
+
+    public searchWarehouses(field:string,value:string):Observable<any>{
+        return this.http.get<any>(`${this.apiServerUrl}/warehouse/all?field=${field}&value=${value}`);
+    }
+
+    public updateWarehouseGet(id:number):Observable<any>{
+        return this.http.get<any>(`${this.apiServerUrl}/warehouse/update/${id}`)
+    }
 }

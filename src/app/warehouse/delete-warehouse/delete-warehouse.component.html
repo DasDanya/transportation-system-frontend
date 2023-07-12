@@ -1,0 +1,41 @@
+<div *ngIf="error; else showWarehouse" class="errorMessage">
+    {{errorMessage}}
+</div>
+
+<ng-template #showWarehouse>
+    <h2 style="margin-top: 15px;">Удаление склада</h2>
+        
+    <h4>Вы уверены, что хотите удалить этот склад?</h4>
+    <hr/>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-3">Номер:</dt>
+            <dd class="col-sm-7" style="margin-bottom: 20px;">{{warehouse.id}}</dd>
+
+            <dt class="col-sm-3">Субъект:</dt>
+            <dd class="col-sm-7" style="margin-bottom: 20px;">{{warehouse.address.state}}</dd>
+
+            <dt class="col-sm-3">Город:</dt>
+            <dd class="col-sm-7" style="margin-bottom: 20px;">{{warehouse.address.city}}</dd>
+
+            <dt class="col-sm-3">Улица:</dt>
+            <dd class="col-sm-7" style="margin-bottom: 20px;">{{warehouse.address.street}}</dd>
+
+            <dt class="col-sm-3">Дом:</dt>
+            <dd class="col-sm-7" style="margin-bottom: 20px;">{{warehouse.address.house}}</dd>
+
+            <dt class="col-sm-3">Ответственный:</dt>
+            <dd *ngIf="warehouse.responsible != null; else withoutResponsible" class="col-sm-7" style="margin-bottom: 20px;">{{warehouse.responsible.surname}} {{warehouse.responsible.name}} {{warehouse.responsible.patronymic}}</dd>
+            <ng-template #withoutResponsible>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">Отсутствует</dd>
+            </ng-template>
+
+            <form name = "form" (ngSubmit)="onSubmit()" style="margin-bottom: 10px;">
+                <button class="btn btn-danger" style="width: 205px;">Удалить</button>
+            </form>
+
+            <a href="warehouse/all">Вернуться к списку складов</a>
+        </dl>
+    </div>
+</ng-template>
+

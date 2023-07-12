@@ -32,7 +32,7 @@
                     <!-- <input type="hidden" name="id" [(ngModel)]="form.id">  -->
                     <button class="btn btn-danger" style="width:340px;">Удалить</button>
                 </form>
-
+                <div *ngIf="error" class="text-danger" style="margin-top: 10px;">Ошибка удаления: {{errorMessage}}</div>
                 <a href="responsible/all">Вернуться к списку ответственных</a>
             </dl>
         </div>

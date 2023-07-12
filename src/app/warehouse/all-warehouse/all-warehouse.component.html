@@ -10,6 +10,40 @@
         <input id="info__body_1" class="info__switch" type="checkbox">
         <label for="info__body_1" class="info__headline">Поиск складов</label>
         <div class="info__body">
+            <form name="form" (ngSubmit)="f.form.valid && searchWarehouses()" #f="ngForm">
+                <div class="d-flex">   
+                    <div class="d-inline-block">
+                        <label>Параметр:</label>
+                    </div>
+                    <div class="d-inline-block" style="width: 300px; margin-left: 10px;">
+                        <select class="form-select" name="field" [(ngModel)]="form.field" #field="ngModel" required> 
+                            <option value = "id">Номер</option>
+                            <option value = "state">Субъект</option>
+                            <option value = "city">Город</option>
+                            <option value = "street">Улица</option>
+                            <option value = "house">Дом</option>
+                            <option value = "responsible">Ответственный</option>
+                        </select>
+                    </div>
+                    <div class="d-inline-block" style="margin-left:30px;">
+                        <label>Данные: </label>
+                    </div>
+                    <div class="d-inline-block" style="width:300px; margin-left:10px;">
+                        <input type="text" name="searchValue" class="form-control" name="searchValue" [(ngModel)]="form.searchValue" #searchValue="ngModel" required>
+                    </div>
+                    <div class="d-inline-block" style="margin-left:30px;">
+                        <button class="btn btn-primary" style="width: 200px;">Найти</button>
+                    </div>
+                    <div class="d-inline-block" style="margin-left:30px;">
+                        <a href="warehouse/all" class="btn btn-primary" style="width: 200px;">Сбросить</a>
+                    </div>
+                </div>
+                <div class="" *ngIf="f.submitted && (field.invalid || searchValue.invalid)">
+                    <span *ngIf="field?.errors?.['required']" class="text-danger" style="margin-left:85px;">Необходимо выбрать параметр поиска</span>
+                    <span *ngIf="field.invalid && searchValue?.errors?.['required']" class="text-danger" style="margin-left:115px;">Необходимо ввести данные для поиска</span>
+                    <span *ngIf="field.valid && searchValue?.errors?.['required']" class="text-danger" style="margin-left:490px;">Необходимо ввести данные для поиска</span>
+                </div>
+            </form>
         </div>
     </div>
 

@@ -30,7 +30,8 @@ export class DeleteResponsibleComponent implements OnInit {
         this.resetError();
       },
       (error: HttpErrorResponse) => {
-        this.setError(error);
+        this.errorMessage = error.error.message;
+        this.error = true;
       }
     )
   }
@@ -43,15 +44,13 @@ export class DeleteResponsibleComponent implements OnInit {
         this.router.navigate(["responsible/all"]);
       },
       (error: HttpErrorResponse) => {
-        this.setError(error);
+        this.errorMessage = "Ошибка удаления ответственного. Причиной ошибки может стать удаление ответственного, который связан со складом";
+        this.error = true;
       }
     )
   }
 
-  private setError(error:HttpErrorResponse){
-    this.errorMessage = error.error.message;
-    this.error = true;
-  }
+  
 
   private resetError(){
     this.error = false;
