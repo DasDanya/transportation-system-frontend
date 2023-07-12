@@ -1,0 +1,47 @@
+<div *ngIf="receivingError; else showWarehouses" class="errorMessage">
+    {{errorMessage}}
+</div>
+
+<ng-template #showWarehouses>
+    <h2 style="margin-top: 15px;">Список складов</h2>
+    <a class="btn btn-primary" href="warehouse/add" style="margin-top: 10px;">Добавить</a>
+
+    <div class="info" style="margin-top:10px">
+        <input id="info__body_1" class="info__switch" type="checkbox">
+        <label for="info__body_1" class="info__headline">Поиск складов</label>
+        <div class="info__body">
+        </div>
+    </div>
+
+    <table class="table" *ngIf="warehouses.length !== 0; else zeroWarehouses">
+        <thead>
+            <tr>
+                <th>Номер</th>
+                <th>Субъект</th>
+                <th>Город</th>
+                <th>Улица</th>
+                <th>Дом</th>
+                <th>Ответственный<th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let warehouse of warehouses">
+                <td>{{warehouse?.id}}</td>
+                <td>{{warehouse?.address?.state}}</td>
+                <td>{{warehouse?.address?.city}}</td>
+                <td>{{warehouse?.address?.street}}</td>
+                <td>{{warehouse?.address?.house}}</td>
+                <td>{{warehouse?.responsible?.surname}} {{warehouse?.responsible?.name}} {{warehouse?.responsible?.patronymic}}<td>
+                <td>
+                    <a href="warehouse/update/{{warehouse?.id}}"><img src="assets/images/change.ico" alt="Изменение" class="smallIcon"></a>
+                    <a href="warehouse/delete/{{warehouse?.id}}"><img src="assets/images/delete.ico" alt="Удаление" class="smallIcon"></a>
+                    <a><img src="assets/images/show.ico" alt="Просмотр" class="smallIcon"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #zeroWarehouses>
+        <div class="errorMessage">Не было найдено ни одного склада</div>
+    </ng-template>
+</ng-template>
+

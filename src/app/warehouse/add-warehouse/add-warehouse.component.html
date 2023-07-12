@@ -1,0 +1,54 @@
+<div class="row" style="margin-top: 15px;">
+    <div class="col-md-5">
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+        <h2>Добавление склада</h2>
+        <hr />
+        <div class="form-group">
+          <label for="state" class="form-label">Субъект</label>
+          <input type="text" class="form-control" name="state" [(ngModel)]="form.state" #state="ngModel" required maxlength="50" pattern="^[А-Яа-я]*(?:[\s-][А-Яа-я]*)*$"/>
+          <div *ngIf="f.submitted && state.invalid">
+            <span *ngIf="state?.errors?.['required']" class="text-danger">Необходимо ввести субъект РФ</span>
+            <span *ngIf="state?.errors?.['pattern']" class="text-danger">Для ввода субъекта можно использовать только русские буквы и тире</span>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:10px;">
+          <label for="city" class="form-label">Город</label>
+          <input type="text" class="form-control" name="city" [(ngModel)]="form.city" #city="ngModel" required maxlength="30" pattern="^[А-Яа-я]*(?:[\s-][А-Яа-я]*)*$"/>
+          <div *ngIf="f.submitted && city.invalid">
+            <span *ngIf="city?.errors?.['required']" class="text-danger">Необходимо ввести город</span>
+            <span *ngIf="city?.errors?.['pattern']" class="text-danger">Для ввода города можно использовать только русские буквы и тире</span>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:10px;">
+          <label for="street" class="form-label">Улица</label>
+          <input type="text" class="form-control" name="street" [(ngModel)]="form.street" #street="ngModel" required maxlength="30" pattern="^[А-Яа-я]*(?:[\s-][А-Яа-я]*)*$"/>
+          <div *ngIf="f.submitted && street.invalid">
+            <span *ngIf="street?.errors?.['required']" class="text-danger">Необходимо ввести улицу</span>
+            <span *ngIf="street?.errors?.['pattern']" class="text-danger">Для ввода улицы можно использовать только русские буквы и тире</span>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:10px;">
+          <label for="house" class="form-label">Дом</label>
+          <input type="text" class="form-control" name="house" [(ngModel)]="form.house" #house="ngModel" required maxlength="7" pattern="\d+[А-Г/\d]*"/>
+          <div *ngIf="f.submitted && house.invalid">
+            <span *ngIf="house?.errors?.['required']" class="text-danger">Необходимо ввести номер дома</span>
+            <span *ngIf="house?.errors?.['pattern']" class="text-danger">Некорректный ввод номера дома</span>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:10px;">
+          <label for="responsible" class="form-label">Ответственный</label>
+          <select class="form-select" name="responsible" id="responsible" [(ngModel)]="form.responsible" #responsible="ngModel" required>
+            <option *ngFor="let responsible of responsibles" value="{{responsible.id}}">{{responsible.surname}} {{responsible.name}} {{responsible.patronymic}}</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
+          <button class="btn btn-primary w-100" style="height:50px;">Добавить</button>
+          <div *ngIf="f.submitted && error" class="text-danger" style="margin-top: 10px;">Ошибка добавления: {{errorMessage}}
+          </div>
+        </div>
+      </form>
+
+      <a href="warehouse/all">Вернуться к списку складов</a>
+      
+    </div>
+</div>

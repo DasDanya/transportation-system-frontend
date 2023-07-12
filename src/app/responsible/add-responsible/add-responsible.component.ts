@@ -9,17 +9,13 @@ import { Router } from '@angular/router';
   templateUrl: './add-responsible.component.html',
   styleUrls: ['./add-responsible.component.css']
 })
-export class AddResponsibleComponent implements OnInit {
+export class AddResponsibleComponent{
   form: any = {};
   failInAdd = false;
   errorMessage = '';
   selectedFile:File;
 
   constructor(private responsibleService: ResponsibleService,private router: Router){}
-
-  ngOnInit(): void {
-      
-  }
 
   public onFileChanged(event:any) {
     this.selectedFile = event.target.files[0];

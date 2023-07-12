@@ -36,7 +36,7 @@
                 <label for="phone" class="form-label">Номер телефона</label>
                 <input type="text" class="form-control" value="{{responsible.phone}}" name="phone" [(ngModel)]="form.phone" #phone="ngModel" required pattern="^\+7-\d{3}-\d{3}-\d{2}-\d{2}" placeholder="+7-111-111-11-11"/>
                 <div *ngIf="f.submitted && phone.invalid">
-                  <span *ngIf="phone?.errors?.['required']" class="text-danger">Необходимо номер телефона ответственного</span>
+                  <span *ngIf="phone?.errors?.['required']" class="text-danger">Необходимо ввести номер телефона ответственного</span>
                   <span *ngIf="phone?.errors?.['pattern']" class="text-danger">Некорректный ввод. Пример: +7-111-111-11-11</span>
                 </div>
               </div>

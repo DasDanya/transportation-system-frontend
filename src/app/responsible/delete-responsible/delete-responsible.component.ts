@@ -37,7 +37,7 @@ export class DeleteResponsibleComponent implements OnInit {
 
   onSubmit(){
     this.responsibleService.deleteResponsible(this.responsible.id).subscribe(
-      (response:Responsible) => {
+      (response:any) => {
         this.resetError();
 
         this.router.navigate(["responsible/all"]);

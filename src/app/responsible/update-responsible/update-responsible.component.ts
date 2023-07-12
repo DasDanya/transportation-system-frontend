@@ -85,7 +85,7 @@ export class UpdateResponsibleComponent implements OnInit {
     }
 
     this.responsibleService.updateResponsible(responsibleUpdate).subscribe(
-      (response:Response) => {
+      (response:any) => {
         this.router.navigate(["responsible/all"]);
       },
       (error: HttpErrorResponse) => {

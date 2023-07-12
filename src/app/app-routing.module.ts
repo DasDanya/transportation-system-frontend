@@ -8,6 +8,8 @@ import {AddResponsibleComponent} from './responsible/add-responsible/add-respons
 import { AllResponsibleComponent } from './responsible/all-responsible/all-responsible.component';
 import { DeleteResponsibleComponent } from './responsible/delete-responsible/delete-responsible.component';
 import { UpdateResponsibleComponent } from './responsible/update-responsible/update-responsible.component';
+import { AddWarehouseComponent } from './warehouse/add-warehouse/add-warehouse.component';
+import { AllWarehouseComponent } from './warehouse/all-warehouse/all-warehouse.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,14 @@ const routes: Routes = [
   {
     path: 'responsible/update/:id',
     component: UpdateResponsibleComponent
+  },
+  {
+    path: 'warehouse/add',
+    component: AddWarehouseComponent
+  },
+  {
+    path: 'warehouse/all',
+    component: AllWarehouseComponent
   }
   
 ];

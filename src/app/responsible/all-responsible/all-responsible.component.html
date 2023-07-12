@@ -56,7 +56,6 @@
         </thead>
         <tbody>
             <tr *ngFor="let responsible of responsibles">
-                <!-- <td><img src="data:image/jpeg;base64,{{responsible?.photo}}" alt="Фото отвественного" style="height: 70px; width: 70px;"></td> -->
                 <td>{{responsible?.surname}}</td>
                 <td>{{responsible?.name}}</td>
                 <td>{{responsible?.patronymic}}</td>
@@ -64,7 +63,7 @@
                 <td>
                     <a href="responsible/update/{{responsible.id}}"><img src="assets/images/change.ico" alt="Изменение" class="smallIcon"></a>
                     <a href="responsible/delete/{{responsible?.id}}"><img src="assets/images/delete.ico" alt="Удаление" class="smallIcon"></a>
-                    <a><img src="assets/images/show.ico" alt="Удаление" class="smallIcon"></a>
+                    <a><img src="assets/images/show.ico" alt="Просмотр" class="smallIcon"></a>
                 </td>
             </tr>
         </tbody>
@@ -73,3 +72,4 @@
         <div class="errorMessage">Не было найдено ни одного ответственного</div>
     </ng-template>
 </ng-template>
+

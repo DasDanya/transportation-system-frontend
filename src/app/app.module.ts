@@ -13,6 +13,8 @@ import { AddResponsibleComponent } from './responsible/add-responsible/add-respo
 import { AllResponsibleComponent } from './responsible/all-responsible/all-responsible.component';
 import { DeleteResponsibleComponent } from './responsible/delete-responsible/delete-responsible.component';
 import { UpdateResponsibleComponent } from './responsible/update-responsible/update-responsible.component';
+import { AddWarehouseComponent } from './warehouse/add-warehouse/add-warehouse.component';
+import { AllWarehouseComponent } from './warehouse/all-warehouse/all-warehouse.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { UpdateResponsibleComponent } from './responsible/update-responsible/upd
     AllResponsibleComponent,
     DeleteResponsibleComponent,
     UpdateResponsibleComponent,
+    AddWarehouseComponent,
+    AllWarehouseComponent,
   ],
   imports: [
     BrowserModule,
