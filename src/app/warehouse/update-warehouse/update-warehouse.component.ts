@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Responsible } from 'src/app/responsible/responsible';
 import { WarehouseWithResponsibles } from '../warehouseWithResponsibles';
+import { Address } from 'src/app/address/address';
+
 declare var $: any;
 
 @Component({
@@ -20,7 +22,7 @@ export class UpdateWarehouseComponent implements OnInit {
   error = false;
   warehouse:Warehouse;
   responsibles:Responsible[];
-  responsibleId:number;
+
   constructor(private warehouseService: WarehouseService, private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
@@ -33,15 +35,13 @@ export class UpdateWarehouseComponent implements OnInit {
       (response:WarehouseWithResponsibles) => {
         this.responsibles = response.responsibles;
         this.warehouse = response.warehouse;
-        this.responsibleId = response.responsibleId;
-        
+
         this.setValueInputs();
         this.resetError();
 
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = error.error.message;
-        this.error = true;
+        this.setError(error);
       }
     )
   }
@@ -52,7 +52,12 @@ export class UpdateWarehouseComponent implements OnInit {
     this.form.city = this.warehouse.address.city;
     this.form.street = this.warehouse.address.street;
     this.form.house = this.warehouse.address.house;
-    this.form.responsible = this.responsibleId;
+    this.form.responsible = this.warehouse.responsible.id;
+  }
+
+  private setError(error:HttpErrorResponse){
+    this.errorMessage = error.error.message;
+    this.error = true;
   }
 
   private resetError(){
@@ -67,7 +72,27 @@ export class UpdateWarehouseComponent implements OnInit {
   }
 
   onSubmit(){
+    let address = new Address(
+      this.form.state,
+      this.form.city,
+      this.form.street,
+      this.form.house,
+      this.warehouse.address.id
+    );
 
+    let selectedResponsible = this.responsibles.find(r=> r.id == this.form.responsible);
+
+    let warehouse = new Warehouse(address,selectedResponsible,this.warehouse.id);
+
+    this.warehouseService.updateWarehouse(warehouse).subscribe(
+      (data : any) =>{
+        this.resetError();  
+        this.router.navigate(["warehouse/all"]);
+      },
+      (error: HttpErrorResponse) =>{
+        this.setError(error);
+      }
+    )
   }
 
 }

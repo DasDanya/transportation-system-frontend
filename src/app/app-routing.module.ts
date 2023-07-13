@@ -12,6 +12,7 @@ import { AddWarehouseComponent } from './warehouse/add-warehouse/add-warehouse.c
 import { AllWarehouseComponent } from './warehouse/all-warehouse/all-warehouse.component';
 import { DeleteWarehouseComponent } from './warehouse/delete-warehouse/delete-warehouse.component';
 import { UpdateWarehouseComponent } from './warehouse/update-warehouse/update-warehouse.component';
+import { ExcelResponsibleComponent } from './responsible/excel-responsible/excel-responsible.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'responsible/update/:id',
     component: UpdateResponsibleComponent
+  },
+  {
+    path: 'responsible/excel/:id',
+    component: ExcelResponsibleComponent
   },
   {
     path: 'warehouse/add',

@@ -46,7 +46,7 @@
                 <option *ngFor="let responsible of responsibles" value="{{responsible.id}}">{{responsible.surname}} {{responsible.name}} {{responsible.patronymic}}</option>
             </select>
             <div *ngIf="f.submitted && responsible.invalid">
-                <span *ngIf="house?.errors?.['required']" class="text-danger">Необходимо выбрать ответственного</span>
+                <span *ngIf="responsible?.errors?.['required']" class="text-danger">Необходимо выбрать ответственного</span>
             </div>
             </div>
             <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">

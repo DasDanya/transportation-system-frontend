@@ -44,5 +44,9 @@ export class ResponsibleService{
     public searchResponsibles(field:string,value:string):Observable<any>{
         return this.http.get<any>(`${this.apiServerUrl}/responsible/all?field=${field}&value=${value.replace(/\+/gi, '%2B')}`);
     }
+
+    public getReportExcel(id:number):Observable<any>{
+        return this.http.get(`${this.apiServerUrl}/responsible/excel/${id}`, {responseType: 'arraybuffer'});
+    }
 }
 

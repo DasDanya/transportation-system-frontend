@@ -40,4 +40,8 @@ export class WarehouseService{
     public updateWarehouseGet(id:number):Observable<any>{
         return this.http.get<any>(`${this.apiServerUrl}/warehouse/update/${id}`)
     }
+
+    public updateWarehouse(warehouse:Warehouse):Observable<any>{
+        return this.http.put(`${this.apiServerUrl}/warehouse/update`, warehouse);
+    }
 }

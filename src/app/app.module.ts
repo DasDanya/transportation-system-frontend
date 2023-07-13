@@ -17,6 +17,7 @@ import { AddWarehouseComponent } from './warehouse/add-warehouse/add-warehouse.c
 import { AllWarehouseComponent } from './warehouse/all-warehouse/all-warehouse.component';
 import { DeleteWarehouseComponent } from './warehouse/delete-warehouse/delete-warehouse.component';
 import { UpdateWarehouseComponent } from './warehouse/update-warehouse/update-warehouse.component';
+import { ExcelResponsibleComponent } from './responsible/excel-responsible/excel-responsible.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UpdateWarehouseComponent } from './warehouse/update-warehouse/update-wa
     AllWarehouseComponent,
     DeleteWarehouseComponent,
     UpdateWarehouseComponent,
+    ExcelResponsibleComponent,
   ],
   imports: [
     BrowserModule,
