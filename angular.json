@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "transportation-system-frontend": {
+    "demofront": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/transportation-system-frontend",
+            "outputPath": "dist/demofront",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "transportation-system-frontend:build:production"
+              "browserTarget": "demofront:build:production"
             },
             "development": {
-              "browserTarget": "transportation-system-frontend:build:development"
+              "browserTarget": "demofront:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "transportation-system-frontend:build"
+            "browserTarget": "demofront:build"
           }
         },
         "test": {
@@ -94,8 +94,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "906ddfd6-f55e-43d2-8f96-65efc7d47247"
   }
 }
