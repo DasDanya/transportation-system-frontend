@@ -13,6 +13,9 @@ import { AllWarehouseComponent } from './warehouse/all-warehouse/all-warehouse.c
 import { DeleteWarehouseComponent } from './warehouse/delete-warehouse/delete-warehouse.component';
 import { UpdateWarehouseComponent } from './warehouse/update-warehouse/update-warehouse.component';
 import { ExcelResponsibleComponent } from './responsible/excel-responsible/excel-responsible.component';
+import { AddCargoComponent } from './cargo/add-cargo/add-cargo.component';
+import { AllCargoComponent } from './cargo/all-cargo/all-cargo.component';
+import { DeleteCargoComponent } from './cargo/delete-cargo/delete-cargo.component';
 
 const routes: Routes = [
   {
@@ -62,6 +65,18 @@ const routes: Routes = [
   {
     path: 'warehouse/update/:id',
     component: UpdateWarehouseComponent
+  },
+  {
+    path: 'cargo/add',
+    component: AddCargoComponent
+  },
+  {
+    path: 'cargo/all',
+    component:AllCargoComponent
+  },
+  {
+    path: 'cargo/delete/:id',
+    component: DeleteCargoComponent
   }
   
 ];

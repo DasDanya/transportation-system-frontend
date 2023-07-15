@@ -1,0 +1,81 @@
+<div *ngIf="error; else showAddCargo" class="errorMessage">
+    {{errorMessage}}
+</div>
+
+<ng-template #showAddCargo>
+    <div class="col-md-5" style="margin-top: 15px;">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" enctype="multipart/form-data">
+          <h2>Добавление груза</h2>
+          <hr />
+          <div class="form-group">
+            <label for="name" class="form-label">Название</label>
+            <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" required maxlength="30"/>
+            <div *ngIf="f.submitted && name.invalid">
+              <span *ngIf="name?.errors?.['required']" class="text-danger">Необходимо ввести название груза</span>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:10px;">
+            <label for="category" class="form-label">Категория</label>
+            <select class="form-select" name="category" [(ngModel)]="form.category" #category="ngModel" required>
+                <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+            </select>
+            <div *ngIf="f.submitted && category.invalid">
+              <span *ngIf="category?.errors?.['required']" class="text-danger">Необходимо выбрать категорию</span>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:10px;">
+            <label for="cost" class="form-label">Цена</label>
+            <input type="number" class="form-control" name="cost" [(ngModel)]="form.cost" #cost="ngModel" min="1" step="0.01" max="9999999.99" required/>
+            <div *ngIf="f.submitted && cost.invalid">
+              <span *ngIf="cost?.errors?.['required']" class="text-danger">Необходимо ввести стоимость одной единицы груза</span>
+              <span *ngIf="cost?.errors?.['min']" class="text-danger">Минимальная стоимость единицы груза = 1₽</span>
+              <span *ngIf="cost?.errors?.['max']" class="text-danger">Максимальная стоимость единицы груза = 9999999.99₽</span>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:10px;">
+            <label for="count" class="form-label">Количество</label>
+            <input type="number" class="form-control" name="count" [(ngModel)]="form.count" #count="ngModel" min="1" step="1" max="100000" required/>
+            <div *ngIf="f.submitted && count.invalid">
+              <span *ngIf="count?.errors?.['required']" class="text-danger">Необходимо ввести количество единиц груза</span>
+              <span *ngIf="count?.errors?.['min']" class="text-danger">Минимальное количество единиц груза = 1</span>
+              <span *ngIf="count?.errors?.['max']" class="text-danger">Максимальное количество единиц груза = 100000</span>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:10px;">
+            <label for="startWarehouse" class="form-label">Стартовый склад</label>
+            <select class="form-select" name="startWarehouse" [(ngModel)]="form.startWarehouse" #startWarehouse="ngModel" required>
+              <option *ngFor="let warehouse of warehouses" value="{{warehouse.id}}">{{warehouse.id}}-{{warehouse.address.state}};{{warehouse.address.city}};{{warehouse.address.street}};{{warehouse.address.house}}</option>
+            </select>
+            <div *ngIf="f.submitted && startWarehouse.invalid">
+              <span *ngIf="startWarehouse?.errors?.['required']" class="text-danger">Необходимо выбрать стартовый склад</span>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:10px;">
+            <label for="endWarehouse" class="form-label">Конечный склад</label>
+            <select class="form-select" name="endWarehouse" [(ngModel)]="form.endWarehouse" #endWarehouse="ngModel" required>
+              <option *ngFor="let warehouse of warehouses" value="{{warehouse.id}}">{{warehouse.id}}-{{warehouse.address.state}};{{warehouse.address.city}};{{warehouse.address.street}};{{warehouse.address.house}}</option>
+            </select>
+            <div *ngIf="f.submitted && endWarehouse.invalid">
+              <span *ngIf="endWarehouse?.errors?.['required']" class="text-danger">Необходимо выбрать конечный склад</span>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: 10px;">
+            <label for="photos" class="form-label">Фотографии</label>
+            <input type="file" (change)="onFilesChanged($event)" class="form-control" name="photos" [(ngModel)]="form.photos" #photos="ngModel" accept=".bmp, .png, .jpeg, .jpg" multiple required>
+            <div *ngIf="f.submitted && photos.invalid">
+                <span *ngIf="photos?.errors?.['required']" class="text-danger">Необходимо выбрать как минимум одну фотографию</span>
+                <span *ngIf="photos?.errors?.['accept']" class="text-danger">Поддерживаются следующие форматы: .bmp, .png, .jpeg, .jpg</span>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
+            <button class="btn btn-primary w-100" style="height:50px;">Добавить</button>
+            <!-- <div *ngIf="f.submitted && error" class="text-danger" style="margin-top: 10px;">Ошибка добавления: {{errorMessage}} -->
+            <!-- </div> -->
+          </div>
+        </form>
+  
+        <a href="cargo/all">Вернуться к списку грузов</a>
+        
+      </div>
+</ng-template>
+

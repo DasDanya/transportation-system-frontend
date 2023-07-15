@@ -5,7 +5,6 @@ import { WarehouseService } from '../warehouse.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Responsible } from 'src/app/responsible/responsible';
-declare var $: any;
 
 @Component({
   selector: 'app-add-warehouse',
@@ -26,7 +25,7 @@ export class AddWarehouseComponent implements OnInit {
   ngOnInit(): void {  
 
     this.getResponsibles();
-    this.searchResponsible();
+    //this.searchResponsible();
   }
 
   getResponsibles(){
@@ -42,11 +41,11 @@ export class AddWarehouseComponent implements OnInit {
     )
   }
 
-  searchResponsible(){
-    $(document).ready(function() {
-      $("#responsible").select2();
-     });
-  }
+  // searchResponsible(){
+  //   $(document).ready(function() {
+  //     $("#responsible").select2();
+  //    });
+  // }
 
   private setError(error:HttpErrorResponse){
     this.errorMessage = error.error.message;

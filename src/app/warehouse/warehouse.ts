@@ -5,7 +5,7 @@ export class Warehouse{
     id: number;
     address: Address;
     responsible:Responsible;
-
+    
     constructor(address: Address, responsible?: Responsible, id?:number){
         this.address = address;
 

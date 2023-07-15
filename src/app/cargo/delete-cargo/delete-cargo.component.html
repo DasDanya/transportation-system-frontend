@@ -1,0 +1,53 @@
+<div *ngIf="error; else showCargo" class="errorMessage">
+    {{errorMessage}}
+</div>
+
+<ng-template #showCargo>
+    <h2 style="margin-top: 15px;">Удаление груза</h2>
+        
+    <h4>Вы уверены, что хотите удалить этот груз?</h4>
+    <hr/>
+
+    <div style="display: flex;">
+            <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let cargoPhoto of cargo.photos">
+                    <img src="data:image/jpeg;base64,{{cargoPhoto.photo}}" alt="Фото груза" id = "img">
+                </ng-template>
+            </ngb-carousel>   
+        <div>
+            <dl class="row" style="margin-left:30px;">
+                <dt class="col-sm-3">Название:</dt>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">{{cargo.name}}</dd>
+
+                <dt class="col-sm-3">Категория:</dt>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">{{cargo.category}}</dd>
+
+                <dt class="col-sm-3">Цена:</dt>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">{{cargo.cost}}</dd>
+
+                <dt class="col-sm-3">Количество:</dt>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">{{cargo.count}}</dd>
+
+                <dt class="col-sm-3">Стартовый склад:</dt>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">{{cargo.startWarehouse?.id}}</dd>
+
+                <dt class="col-sm-3">Текущий склад:</dt>
+                <dd *ngIf="cargo.actualWarehouse != null; else withoutActualWarehouse" class="col-sm-7" style="margin-bottom: 20px;">{{cargo.actualWarehouse.id}}</dd>
+                <ng-template #withoutActualWarehouse>
+                    <dd class="col-sm-7" style="margin-bottom: 20px;">Отсутствует</dd>
+                </ng-template>
+
+                <dt class="col-sm-3">Конечный склад:</dt>
+                <dd class="col-sm-7" style="margin-bottom: 20px;">{{cargo.endWarehouse?.id}}</dd>
+
+                <form name = "form" (ngSubmit)="onSubmit()" style="margin-bottom: 10px;">
+                    <button class="btn btn-danger" style="width: 205px;">Удалить</button>
+                </form>
+
+                <a href="cargo/all">Вернуться к списку грузов</a>
+            </dl>
+        </div>
+    </div>
+</ng-template>
+
+

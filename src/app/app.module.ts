@@ -18,6 +18,10 @@ import { AllWarehouseComponent } from './warehouse/all-warehouse/all-warehouse.c
 import { DeleteWarehouseComponent } from './warehouse/delete-warehouse/delete-warehouse.component';
 import { UpdateWarehouseComponent } from './warehouse/update-warehouse/update-warehouse.component';
 import { ExcelResponsibleComponent } from './responsible/excel-responsible/excel-responsible.component';
+import { AddCargoComponent } from './cargo/add-cargo/add-cargo.component';
+import { AllCargoComponent } from './cargo/all-cargo/all-cargo.component';
+import { DeleteCargoComponent } from './cargo/delete-cargo/delete-cargo.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,12 +38,16 @@ import { ExcelResponsibleComponent } from './responsible/excel-responsible/excel
     DeleteWarehouseComponent,
     UpdateWarehouseComponent,
     ExcelResponsibleComponent,
+    AddCargoComponent,
+    AllCargoComponent,
+    DeleteCargoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

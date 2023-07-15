@@ -7,7 +7,6 @@ import { Responsible } from 'src/app/responsible/responsible';
 import { WarehouseWithResponsibles } from '../warehouseWithResponsibles';
 import { Address } from 'src/app/address/address';
 
-declare var $: any;
 
 @Component({
   selector: 'app-update-warehouse',
@@ -27,7 +26,7 @@ export class UpdateWarehouseComponent implements OnInit {
 
   ngOnInit(): void {
       this.route.params.subscribe(params=> this.setStartData(params['id']))
-      this.searchResponsible();
+      // this.searchResponsible();
   }
 
   setStartData(id:number){
@@ -65,11 +64,11 @@ export class UpdateWarehouseComponent implements OnInit {
     this.errorMessage = '';
   }
 
-  searchResponsible(){
-    $(document).ready(function() {
-      $("#responsible").select2();
-     });
-  }
+  // searchResponsible(){
+  //   $(document).ready(function() {
+  //     $("#responsible").select2();
+  //    });
+  // }
 
   onSubmit(){
     let address = new Address(
