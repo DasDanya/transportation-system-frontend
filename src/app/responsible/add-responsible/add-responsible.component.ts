@@ -45,8 +45,6 @@ export class AddResponsibleComponent{
         this.router.navigate(["responsible/all"]);
       },
       (error: HttpErrorResponse) =>{
-        //var errorStatus = error.status;
-        // errorStatus == 400 ? this.errorMessage = "Введенный номер телефона принадлежит другому ответственному" : this.errorMessage = error.message; 
         this.failInAdd = true;
         this.errorMessage = error.error.message;
       }

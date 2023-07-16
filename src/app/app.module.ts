@@ -22,6 +22,7 @@ import { AddCargoComponent } from './cargo/add-cargo/add-cargo.component';
 import { AllCargoComponent } from './cargo/all-cargo/all-cargo.component';
 import { DeleteCargoComponent } from './cargo/delete-cargo/delete-cargo.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateCargoComponent } from './cargo/update-cargo/update-cargo.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AddCargoComponent,
     AllCargoComponent,
     DeleteCargoComponent,
+    UpdateCargoComponent,
   ],
   imports: [
     BrowserModule,

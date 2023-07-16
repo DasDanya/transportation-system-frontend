@@ -16,8 +16,13 @@ import { ExcelResponsibleComponent } from './responsible/excel-responsible/excel
 import { AddCargoComponent } from './cargo/add-cargo/add-cargo.component';
 import { AllCargoComponent } from './cargo/all-cargo/all-cargo.component';
 import { DeleteCargoComponent } from './cargo/delete-cargo/delete-cargo.component';
+import { UpdateCargoComponent } from './cargo/update-cargo/update-cargo.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'home',
     component: HomeComponent
@@ -77,8 +82,11 @@ const routes: Routes = [
   {
     path: 'cargo/delete/:id',
     component: DeleteCargoComponent
-  }
-  
+  },
+  {
+    path: 'cargo/update/:id',
+    component: UpdateCargoComponent
+  },  
 ];
 
 @NgModule({

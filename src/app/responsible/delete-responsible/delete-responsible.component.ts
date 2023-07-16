@@ -15,7 +15,6 @@ export class DeleteResponsibleComponent implements OnInit {
   errorMessage = '';
   error = false;
   responsible:Responsible;
-
   constructor(private responsibleService: ResponsibleService, private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
@@ -26,7 +25,6 @@ export class DeleteResponsibleComponent implements OnInit {
     this.responsibleService.deleteResponsibleGet(id).subscribe(
       (response:Responsible) => {
         this.responsible = response;
-    
         this.resetError();
       },
       (error: HttpErrorResponse) => {

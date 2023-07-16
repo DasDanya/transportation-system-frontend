@@ -1,28 +1,31 @@
-import { HttpClient} from "@angular/common/http";
+import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { TokenStorageService } from "../auth/token-storage.service";
 
-
-// const httpOptions = {
-//     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-//   };
 
 @Injectable({
     providedIn: 'root'
 })
 export class ResponsibleService{
 
-    
     private apiServerUrl = 'http://localhost:8080/api';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private tokenStorage:TokenStorageService) {}
 
     public getResponsibles(): Observable<any>{
         return this.http.get<any>(`${this.apiServerUrl}/responsible/all`);
     }
 
     public deleteResponsibleGet(id:number): Observable<any>{
-        return this.http.get<any>(`${this.apiServerUrl}/responsible/delete/${id}`);
+        var headers_object = new HttpHeaders({
+            'Content-Type': 'application/json',
+             'Authorization': "Bearer "+this.tokenStorage.getToken()});
+      
+              const httpOptions = {
+                headers: headers_object
+              };
+        return this.http.get<any>(`${this.apiServerUrl}/responsible/delete/${id}`,httpOptions);
     }
     
     public deleteResponsible(id:number):Observable<any>{

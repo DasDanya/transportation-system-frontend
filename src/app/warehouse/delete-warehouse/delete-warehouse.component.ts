@@ -3,6 +3,7 @@ import { Warehouse } from '../warehouse';
 import { WarehouseService } from '../warehouse.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-delete-warehouse',
@@ -16,7 +17,7 @@ export class DeleteWarehouseComponent implements OnInit {
   error = false;
   warehouse:Warehouse;
 
-  constructor(private warehouseService: WarehouseService, private route: ActivatedRoute, private router:Router){}
+  constructor(private warehouseService: WarehouseService, private route: ActivatedRoute, private router:Router,private tokenStorage: TokenStorageService){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params=> this.getWarehouse(params['id']))

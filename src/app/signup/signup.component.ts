@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { SignupInfo } from '../auth/signup-info';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -12,11 +13,10 @@ export class SignupComponent {
 
   form: any = {};
   //signupInfo: SignupInfo;
-  isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   onSubmit() {
 
@@ -33,8 +33,10 @@ export class SignupComponent {
       
       this.authService.signUp(signupInfo).subscribe(
         data => {
-          this.isSignedUp = true;
+          this.isSignUpFailed = false;
           this.errorMessage = '';
+
+          this.router.navigate(["auth/signin"]).then(()=>window.location.reload());
         },
         (error: HttpErrorResponse) => {
           this.errorMessage = error.error.message;

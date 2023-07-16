@@ -37,4 +37,12 @@ export class CargoService{
             return this.http.get<any>(`${this.apiServerUrl}/cargo/all?field=${field}&value=${value}&conditional=${conditional}`);
         }
     }
+
+    public updateCargoGet(id:number):Observable<any>{
+        return this.http.get<any>(`${this.apiServerUrl}/cargo/update/${id}`);
+    }
+
+    public updateCargo(cargo:FormData):Observable<any>{
+        return this.http.put(`${this.apiServerUrl}/cargo/update`,cargo);
+    }
 }

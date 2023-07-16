@@ -15,7 +15,7 @@ export class HomeComponent {
     this.info = {
       token:this.token.getToken(),
       username: this.token.getUsername(),
-      authorities: this.token.getAuthorities()
+      //authorities: this.token.getAuthorities()
     };
   }
 

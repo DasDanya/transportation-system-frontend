@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from './auth/token-storage.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,13 +12,15 @@ export class AppComponent implements OnInit {
 
   roles!: string[];
   authority!: string;
+  username!: string;
   title = 'transportation-system-frontend';
 
-  constructor(private tokenStorage: TokenStorageService) { }
+  constructor(private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
+      this.username = this.tokenStorage.getUsername();
       this.roles.every(role => {
         if (role === 'ROLE_ADMIN') {
           this.authority = 'admin';
@@ -34,6 +37,6 @@ export class AppComponent implements OnInit {
 
   logout(){
     this.tokenStorage.signOut();
-    window.location.reload();
+    this.router.navigate(["home"]).then(()=>window.location.reload());
   }
 }

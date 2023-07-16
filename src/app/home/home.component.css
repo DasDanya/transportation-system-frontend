@@ -1,0 +1,35 @@
+.startMessage{
+    top:20%;
+    left: 50%;
+    transform: translate3d(-50%,-50%, 0);
+    position: absolute;
+    font-size: 30px;
+    width: 1100px;
+    text-align: center;
+}
+
+.cols {
+    margin-top: 170px;
+	white-space: nowrap;
+	font-size: 0;
+}
+.cols-item {
+	white-space: normal;	
+	display: inline-block;
+	width: 30%;
+	vertical-align: top;
+	margin-right: 5%;
+    text-align: center;
+}
+.cols .cols-item:last-child {
+	margin-right: 0 ;
+}
+
+.heading{
+    font-size: 20px;
+    color:black;
+}
+
+.colImg{
+    height: 400px;
+}
