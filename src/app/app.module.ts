@@ -23,6 +23,7 @@ import { AllCargoComponent } from './cargo/all-cargo/all-cargo.component';
 import { DeleteCargoComponent } from './cargo/delete-cargo/delete-cargo.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateCargoComponent } from './cargo/update-cargo/update-cargo.component';
+import { ExcelWarehouseComponent } from './warehouse/excel-warehouse/excel-warehouse.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { UpdateCargoComponent } from './cargo/update-cargo/update-cargo.componen
     AllCargoComponent,
     DeleteCargoComponent,
     UpdateCargoComponent,
+    ExcelWarehouseComponent,
   ],
   imports: [
     BrowserModule,

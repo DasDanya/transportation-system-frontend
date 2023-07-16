@@ -17,6 +17,7 @@ import { AddCargoComponent } from './cargo/add-cargo/add-cargo.component';
 import { AllCargoComponent } from './cargo/all-cargo/all-cargo.component';
 import { DeleteCargoComponent } from './cargo/delete-cargo/delete-cargo.component';
 import { UpdateCargoComponent } from './cargo/update-cargo/update-cargo.component';
+import { ExcelWarehouseComponent } from './warehouse/excel-warehouse/excel-warehouse.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,10 @@ const routes: Routes = [
     component: UpdateWarehouseComponent
   },
   {
+    path: 'warehouse/excel/:id',
+    component: ExcelWarehouseComponent
+  }, 
+  {
     path: 'cargo/add',
     component: AddCargoComponent
   },
@@ -86,7 +91,7 @@ const routes: Routes = [
   {
     path: 'cargo/update/:id',
     component: UpdateCargoComponent
-  },  
+  } 
 ];
 
 @NgModule({

@@ -1,0 +1,9 @@
+<div *ngIf="error; else goodMessage" class="errorMessage">
+    {{message}}
+</div>
+
+<ng-template #goodMessage>
+    <div class="goodMessage">
+        {{message}}
+    </div>
+</ng-template>

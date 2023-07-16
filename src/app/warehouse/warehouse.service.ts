@@ -44,4 +44,8 @@ export class WarehouseService{
     public updateWarehouse(warehouse:Warehouse):Observable<any>{
         return this.http.put(`${this.apiServerUrl}/warehouse/update`, warehouse);
     }
+
+    public getReportExcel(id:number):Observable<any>{
+        return this.http.get(`${this.apiServerUrl}/warehouse/excel/${id}`, {responseType: 'arraybuffer'});
+    }
 }

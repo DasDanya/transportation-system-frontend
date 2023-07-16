@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { ResponsibleService } from '../responsible.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
+import { WarehouseService } from '../warehouse.service';
 
 @Component({
-  selector: 'app-excel-responsible',
-  templateUrl: './excel-responsible.component.html',
-  styleUrls: ['./excel-responsible.component.css']
+  selector: 'app-excel-warehouse',
+  templateUrl: './excel-warehouse.component.html',
+  styleUrls: ['./excel-warehouse.component.css']
 })
-export class ExcelResponsibleComponent implements OnInit {
+export class ExcelWarehouseComponent implements OnInit {
 
   message = '';
   error = false;
 
-  constructor(private responsibleService:ResponsibleService, private route:ActivatedRoute, private tokenStorage:TokenStorageService){}
- 
+  constructor(private warehouseService: WarehouseService, private route:ActivatedRoute, private tokenStorage:TokenStorageService){}
+
   ngOnInit(): void {
     if(this.accessVerification()){
       this.route.params.subscribe(params=> this.getReportExcel(params['id']))
@@ -37,7 +37,7 @@ export class ExcelResponsibleComponent implements OnInit {
   }
 
   getReportExcel(id:number){
-    this.responsibleService.getReportExcel(id).subscribe(
+    this.warehouseService.getReportExcel(id).subscribe(
       (response:Blob) => {
         var file = new Blob([response], {type:'application/vnd.ms-excel'});
         let url = window.URL.createObjectURL(file);
@@ -46,14 +46,15 @@ export class ExcelResponsibleComponent implements OnInit {
         if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
           alert('Пожалуйста, отключите блокировщик всплывающих окон и попробуйте еще раз');
         }else{
-          this.message = "Файл с данными о складах отвественного успешно получен!";
+          this.message = `Файл с данными о грузах склада №${id} успешно получен!`;
           this.error = false;
         }
       },
       (error: HttpErrorResponse) => {
-        this.message = "Ошибка получения файла с данными о складах ответственного";
+        this.message = `Ошибка получения файла с данными о грузах склада №${id}`;
         this.error = true;
       }
     )
   }
+
 }
