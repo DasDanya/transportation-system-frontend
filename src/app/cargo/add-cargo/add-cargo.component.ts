@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Warehouse } from 'src/app/warehouse/warehouse';
 import { CargoService } from '../cargo.service';
 import { Cargo } from '../cargo';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 declare var $: any;
 
 @Component({
@@ -24,10 +25,23 @@ export class AddCargoComponent {
     'Антисанитарный', 'Длинномерный', 'Живой', 'Негабаритный', 'Обычный', 'Опасный', 'Скоропортящийся', 'Тяжеловесный'
   ];
 
-  constructor(private cargoService: CargoService, private router: Router){}
+  constructor(private cargoService: CargoService, private router: Router,private tokenStorage: TokenStorageService){}
 
   ngOnInit(): void {
+      this.accessVerification();
       this.getStartData();
+  }
+
+  accessVerification(){
+    let userRoles = this.tokenStorage.getAuthorities();
+
+    if(userRoles.indexOf('ROLE_ADMIN') !== -1 || userRoles.indexOf('ROLE_MODERATOR') !== -1){
+      this.error = false;
+      this.errorMessage = '';
+    }else{
+      this.errorMessage = "Доступ к запрошенному ресурсу запрещен";
+      this.error =  true;
+    }
   }
 
   getStartData(){

@@ -4,7 +4,7 @@
 
 <ng-template #showResponsibles>
     <h2 style="margin-top: 15px;">Список ответственных</h2>
-    <a class="btn btn-primary" href="responsible/add" style="margin-top: 10px;">Добавить</a>
+    <a *ngIf="userRoles.indexOf('ROLE_ADMIN') !== -1" class="btn btn-primary" href="responsible/add" style="margin-top: 10px;">Добавить</a>
 
     <div class="info" style="margin-top:10px">
         <input id="info__body_1" class="info__switch" type="checkbox">
@@ -61,9 +61,9 @@
                 <td>{{responsible?.patronymic}}</td>
                 <td>{{responsible?.phone}}</td>
                 <td>
-                    <a href="responsible/update/{{responsible.id}}"><img src="assets/images/change.ico" alt="Изменение" class="smallIcon"></a>
-                    <a href="responsible/delete/{{responsible?.id}}"><img src="assets/images/delete.ico" alt="Удаление" class="smallIcon"></a>
-                    <a href="responsible/excel/{{responsible?.id}}"><img src="assets/images/download.ico" alt="Отчёт" class="smallIcon"></a>
+                    <a *ngIf="userRoles.indexOf('ROLE_ADMIN') !== -1 || userRoles.indexOf('ROLE_MODERATOR') !== -1" href="responsible/update/{{responsible.id}}"><img src="assets/images/change.ico" alt="Изменение" class="smallIcon"></a>
+                    <a *ngIf="userRoles.indexOf('ROLE_ADMIN') !== -1"  href="responsible/delete/{{responsible?.id}}"><img src="assets/images/delete.ico" alt="Удаление" class="smallIcon"></a>
+                    <a *ngIf="userRoles.indexOf('ROLE_ADMIN') !== -1 || userRoles.indexOf('ROLE_MODERATOR') !== -1" href="responsible/excel/{{responsible?.id}}"><img src="assets/images/download.ico" alt="Отчёт" class="smallIcon"></a>
                 </td>
             </tr>
         </tbody>

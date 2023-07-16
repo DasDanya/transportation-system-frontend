@@ -5,6 +5,7 @@ import { WarehouseService } from '../warehouse.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Responsible } from 'src/app/responsible/responsible';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-add-warehouse',
@@ -19,13 +20,24 @@ export class AddWarehouseComponent implements OnInit {
   responsibles:Responsible[];
 
 
-  constructor(private warehouseService: WarehouseService, private router: Router){}
+  constructor(private warehouseService: WarehouseService, private router: Router,private tokenStorage: TokenStorageService){}
 
   
   ngOnInit(): void {  
-
+    this.accessVerification();
     this.getResponsibles();
-    //this.searchResponsible();
+  }
+
+  private accessVerification(){
+    let userRoles = this.tokenStorage.getAuthorities();
+
+    if(userRoles.indexOf('ROLE_ADMIN') !== -1){
+      this.error = false;
+      this.errorMessage = '';
+    }else{
+      this.errorMessage = "Доступ к запрошенному ресурсу запрещен";
+      this.error =  true;
+    }
   }
 
   getResponsibles(){

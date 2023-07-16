@@ -17,15 +17,8 @@ export class ResponsibleService{
         return this.http.get<any>(`${this.apiServerUrl}/responsible/all`);
     }
 
-    public deleteResponsibleGet(id:number): Observable<any>{
-        var headers_object = new HttpHeaders({
-            'Content-Type': 'application/json',
-             'Authorization': "Bearer "+this.tokenStorage.getToken()});
-      
-              const httpOptions = {
-                headers: headers_object
-              };
-        return this.http.get<any>(`${this.apiServerUrl}/responsible/delete/${id}`,httpOptions);
+    public deleteResponsibleGet(id:number){
+        return this.http.get<any>(`${this.apiServerUrl}/responsible/delete/${id}`);
     }
     
     public deleteResponsible(id:number):Observable<any>{

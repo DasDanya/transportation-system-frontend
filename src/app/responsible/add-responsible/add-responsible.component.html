@@ -1,56 +1,61 @@
-  <div class="row" style="margin-top: 15px;">
-      <div class="col-md-5">
-        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" enctype="multipart/form-data">
-          <h2>Добавление ответственного</h2>
-          <hr />
-          <div class="form-group">
-            <label for="surname" class="form-label">Фамилия</label>
-            <input type="text" class="form-control" name="surname" [(ngModel)]="form.surname" #surname="ngModel" required maxlength="30" pattern="^[А-Яа-я]+$"/>
-            <div *ngIf="f.submitted && surname.invalid">
-              <span *ngIf="surname?.errors?.['required']" class="text-danger">Необходимо ввести фамилию ответственного</span>
-              <span *ngIf="surname?.errors?.['pattern']" class="text-danger">Фамилия должна состоять из русских букв</span>
+<div *ngIf="startError; else addResponsible" class="errorMessage">
+  {{errorMessage}}
+</div>
+  
+  <ng-template #addResponsible>
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-md-5">
+          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" enctype="multipart/form-data">
+            <h2>Добавление ответственного</h2>
+            <hr />
+            <div class="form-group">
+              <label for="surname" class="form-label">Фамилия</label>
+              <input type="text" class="form-control" name="surname" [(ngModel)]="form.surname" #surname="ngModel" required maxlength="30" pattern="^[А-Яа-я]+$"/>
+              <div *ngIf="f.submitted && surname.invalid">
+                <span *ngIf="surname?.errors?.['required']" class="text-danger">Необходимо ввести фамилию ответственного</span>
+                <span *ngIf="surname?.errors?.['pattern']" class="text-danger">Фамилия должна состоять из русских букв</span>
+              </div>
             </div>
-          </div>
-          <div class="form-group" style="margin-top:10px;">
-            <label for="name" class="form-label">Имя</label>
-            <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" required maxlength="20" pattern="^[А-Яа-я]+$"/>
-            <div *ngIf="f.submitted && name.invalid">
-              <span *ngIf="name?.errors?.['required']" class="text-danger">Необходимо ввести имя ответственного</span>
-              <span *ngIf="name?.errors?.['pattern']" class="text-danger">Имя должно состоять из русских букв</span>
+            <div class="form-group" style="margin-top:10px;">
+              <label for="name" class="form-label">Имя</label>
+              <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" required maxlength="20" pattern="^[А-Яа-я]+$"/>
+              <div *ngIf="f.submitted && name.invalid">
+                <span *ngIf="name?.errors?.['required']" class="text-danger">Необходимо ввести имя ответственного</span>
+                <span *ngIf="name?.errors?.['pattern']" class="text-danger">Имя должно состоять из русских букв</span>
+              </div>
             </div>
-          </div>
-          <div class="form-group" style="margin-top:10px;">
-            <label for="patronymic" class="form-label">Отчество</label>
-            <input type="text" class="form-control" name="patronymic" [(ngModel)]="form.patronymic" #patronymic="ngModel" maxlength="30" pattern="^[А-Яа-я]*$"/>
-            <div *ngIf="f.submitted && name.invalid">
-              <span *ngIf="patronymic?.errors?.['pattern']" class="text-danger">Отчество должно состоять из русских букв</span>
+            <div class="form-group" style="margin-top:10px;">
+              <label for="patronymic" class="form-label">Отчество</label>
+              <input type="text" class="form-control" name="patronymic" [(ngModel)]="form.patronymic" #patronymic="ngModel" maxlength="30" pattern="^[А-Яа-я]*$"/>
+              <div *ngIf="f.submitted && name.invalid">
+                <span *ngIf="patronymic?.errors?.['pattern']" class="text-danger">Отчество должно состоять из русских букв</span>
+              </div>
             </div>
-          </div>
-          <div class="form-group" style="margin-top:10px;">
-            <label for="phone" class="form-label">Номер телефона</label>
-            <input type="text" class="form-control" name="phone" [(ngModel)]="form.phone" #phone="ngModel" required pattern="^\+7-\d{3}-\d{3}-\d{2}-\d{2}" placeholder="+7-111-111-11-11"/>
-            <div *ngIf="f.submitted && phone.invalid">
-              <span *ngIf="phone?.errors?.['required']" class="text-danger">Необходимо ввести номер телефона ответственного</span>
-              <span *ngIf="phone?.errors?.['pattern']" class="text-danger">Некорректный ввод. Пример: +7-111-111-11-11</span>
+            <div class="form-group" style="margin-top:10px;">
+              <label for="phone" class="form-label">Номер телефона</label>
+              <input type="text" class="form-control" name="phone" [(ngModel)]="form.phone" #phone="ngModel" required pattern="^\+7-\d{3}-\d{3}-\d{2}-\d{2}" placeholder="+7-111-111-11-11"/>
+              <div *ngIf="f.submitted && phone.invalid">
+                <span *ngIf="phone?.errors?.['required']" class="text-danger">Необходимо ввести номер телефона ответственного</span>
+                <span *ngIf="phone?.errors?.['pattern']" class="text-danger">Некорректный ввод. Пример: +7-111-111-11-11</span>
+              </div>
             </div>
-          </div>
-          <div class="form-group" style="margin-top: 10px;">
-            <label for="photo" class="form-label">Фотография</label>
-            <input type="file" (change)="onFileChanged($event)" class="form-control" name="photo" [(ngModel)]="form.photo" #photo="ngModel" accept=".bmp, .png, .jpeg, .jpg" required>
-            <div *ngIf="f.submitted && photo.invalid">
-                <span *ngIf="photo?.errors?.['required']" class="text-danger">Необходимо выбрать фотографию ответственного</span>
-                <span *ngIf="photo?.errors?.['accept']" class="text-danger">Поддерживаются следующие форматы: .bmp, .png, .jpeg, .jpg</span>
+            <div class="form-group" style="margin-top: 10px;">
+              <label for="photo" class="form-label">Фотография</label>
+              <input type="file" (change)="onFileChanged($event)" class="form-control" name="photo" [(ngModel)]="form.photo" #photo="ngModel" accept=".bmp, .png, .jpeg, .jpg" required>
+              <div *ngIf="f.submitted && photo.invalid">
+                  <span *ngIf="photo?.errors?.['required']" class="text-danger">Необходимо выбрать фотографию ответственного</span>
+                  <span *ngIf="photo?.errors?.['accept']" class="text-danger">Поддерживаются следующие форматы: .bmp, .png, .jpeg, .jpg</span>
+              </div>
             </div>
-          </div>
-          <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
-            <button class="btn btn-primary w-100" style="height:50px;">Добавить</button>
-            <div *ngIf="f.submitted && failInAdd" class="text-danger" style="margin-top: 10px;">Ошибка добавления: {{errorMessage}}
+            <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
+              <button class="btn btn-primary w-100" style="height:50px;">Добавить</button>
+              <div *ngIf="f.submitted && failInAdd" class="text-danger" style="margin-top: 10px;">Ошибка добавления: {{errorMessage}}
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
 
-        <a href="responsible/all">Вернуться к списку ответственных</a>
-        
-      </div>
-  </div>
-
+          <a href="responsible/all">Вернуться к списку ответственных</a>
+          
+        </div>
+    </div>
+</ng-template>

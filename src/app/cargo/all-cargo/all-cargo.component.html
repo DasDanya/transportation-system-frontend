@@ -4,7 +4,7 @@
 
 <ng-template #showCargos>
     <h2 style="margin-top: 15px;">Список грузов</h2>
-    <a class="btn btn-primary" href="cargo/add" style="margin-top: 10px;">Добавить</a>
+    <a *ngIf="userRoles.indexOf('ROLE_ADMIN') !== -1 || userRoles.indexOf('ROLE_MODERATOR') !== -1" class="btn btn-primary" href="cargo/add" style="margin-top: 10px;">Добавить</a>
 
     <div class="info" style="margin-top:10px">
         <input id="info__body_1" class="info__switch" type="checkbox">
@@ -85,9 +85,9 @@
                 <td>{{cargo?.actualWarehouse?.id}}</td>
                 <td>{{cargo?.endWarehouse?.id}}</td>
                 <td>
-                    <a href="cargo/update/{{cargo?.id}}"><img src="assets/images/change.ico" alt="Изменение" class="smallIcon"></a>
-                    <a href="cargo/delete/{{cargo?.id}}"><img src="assets/images/delete.ico" alt="Удаление" class="smallIcon"></a>
-                    <a href="cargo/excel/{{cargo?.id}}"><img src="assets/images/download.ico" alt="Отчёт" class="smallIcon"></a>
+                    <a *ngIf="userRoles.indexOf('ROLE_ADMIN') !== -1 || userRoles.indexOf('ROLE_MODERATOR') !== -1"  href="cargo/update/{{cargo?.id}}"><img src="assets/images/change.ico" alt="Изменение" class="smallIcon"></a>
+                    <a *ngIf="userRoles.indexOf('ROLE_ADMIN') !== -1 || userRoles.indexOf('ROLE_MODERATOR') !== -1"  href="cargo/delete/{{cargo?.id}}"><img src="assets/images/delete.ico" alt="Удаление" class="smallIcon"></a>
+                    <!-- <a href="cargo/excel/{{cargo?.id}}"><img src="assets/images/download.ico" alt="Отчёт" class="smallIcon"></a> -->
                 </td>
             </tr>
         </tbody>

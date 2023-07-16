@@ -3,6 +3,7 @@ import { Responsible } from '../responsible';
 import { ResponsibleService } from '../responsible.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-delete-responsible',
@@ -15,12 +16,25 @@ export class DeleteResponsibleComponent implements OnInit {
   errorMessage = '';
   error = false;
   responsible:Responsible;
-  constructor(private responsibleService: ResponsibleService, private route: ActivatedRoute, private router: Router){}
+  constructor(private responsibleService: ResponsibleService, private route: ActivatedRoute, private router: Router, private tokenStorage:TokenStorageService){}
 
   ngOnInit(): void {
+    this.accessVerification();
     this.route.params.subscribe(params=> this.getResponsible(params['id']))
   }
   
+  private accessVerification(){
+    let userRoles = this.tokenStorage.getAuthorities();
+
+    if(userRoles.indexOf('ROLE_ADMIN') !== -1){
+      this.error = false;
+      this.errorMessage = '';
+    }else{
+      this.errorMessage = "Доступ к запрошенному ресурсу запрещен";
+      this.error =  true;
+    }
+  }
+
   getResponsible(id:number){
     this.responsibleService.deleteResponsibleGet(id).subscribe(
       (response:Responsible) => {

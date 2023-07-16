@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CargoService } from '../cargo.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Cargo } from '../cargo';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-all-cargo',
@@ -14,12 +15,24 @@ export class AllCargoComponent implements OnInit {
   error = false;
   errorMessage = '';
   cargos: Cargo[];
+  userRoles:string[];
 
-  constructor(private cargoService:CargoService){}
+  constructor(private cargoService:CargoService,private tokenStorage:TokenStorageService){}
 
   ngOnInit(): void {
+    this.accessVerification();
     this.getCargos();
   }
+
+  private accessVerification(){
+    this.userRoles = this.tokenStorage.getAuthorities();
+    
+    if(this.userRoles.length == 0){
+      this.errorMessage = "Доступ к запрошенному ресурсу запрещен";
+      this.error = true;
+    }
+  }
+
 
   getCargos(){
     this.cargoService.getCargos().subscribe(

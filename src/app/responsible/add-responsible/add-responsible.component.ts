@@ -3,24 +3,42 @@ import { Responsible } from '../responsible';
 import { ResponsibleService } from '../responsible.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-add-responsible',
   templateUrl: './add-responsible.component.html',
   styleUrls: ['./add-responsible.component.css']
 })
-export class AddResponsibleComponent{
+export class AddResponsibleComponent implements OnInit{
   form: any = {};
   failInAdd = false;
   errorMessage = '';
   selectedFile:File;
+  startError = false;
+ 
+  constructor(private responsibleService: ResponsibleService,private router: Router,private tokenStorage: TokenStorageService){}
 
-  constructor(private responsibleService: ResponsibleService,private router: Router){}
+  ngOnInit(): void {
+      this.accessVerification();
+  }
 
   public onFileChanged(event:any) {
     this.selectedFile = event.target.files[0];
   }
 
+  private accessVerification(){
+    let userRoles = this.tokenStorage.getAuthorities();
+
+
+    if(userRoles.indexOf('ROLE_ADMIN') !== -1){
+      this.startError = false;
+      this.errorMessage = '';
+    }else{
+      this.errorMessage = "Доступ к запрошенному ресурсу запрещен";
+      this.startError =  true;
+    }
+  }
 
   onSubmit(){
       const responsible = new Responsible(

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResponsibleService } from '../responsible.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-excel-responsible',
@@ -13,10 +14,26 @@ export class ExcelResponsibleComponent implements OnInit {
   message = '';
   error = false;
 
-  constructor(private responsibleService:ResponsibleService, private route:ActivatedRoute, private router: Router){}
+  constructor(private responsibleService:ResponsibleService, private route:ActivatedRoute, private router: Router, private tokenStorage:TokenStorageService){}
  
   ngOnInit(): void {
-    this.route.params.subscribe(params=> this.getReportExcel(params['id']))
+    if(this.accessVerification()){
+      this.route.params.subscribe(params=> this.getReportExcel(params['id']))
+    }else{
+      this.error = true;
+    }
+  }
+
+  accessVerification():boolean{
+    let userRoles = this.tokenStorage.getAuthorities();
+
+    if(userRoles.indexOf('ROLE_ADMIN') !== -1 || userRoles.indexOf('ROLE_MODERATOR') !== -1){
+      this.message = '';
+      return true;
+    }else{
+      this.message = "Доступ к запрошенному ресурсу запрещен";
+      return false;
+    }
   }
 
   getReportExcel(id:number){

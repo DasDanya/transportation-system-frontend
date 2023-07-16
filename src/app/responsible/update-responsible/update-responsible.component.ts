@@ -3,6 +3,7 @@ import { Responsible } from '../responsible';
 import { ResponsibleService } from '../responsible.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 
 @Component({
@@ -19,12 +20,24 @@ export class UpdateResponsibleComponent implements OnInit {
   error = false;
   responsible : Responsible;
 
-  constructor(private responsibleService: ResponsibleService, private route: ActivatedRoute, private router: Router){}
+  constructor(private responsibleService: ResponsibleService, private route: ActivatedRoute, private router: Router, private tokenStorage:TokenStorageService){}
 
   ngOnInit(): void {
+    this.accessVerification();
     this.route.params.subscribe(params=> this.getUpdatedResponsible(params['id']))
   }
 
+  accessVerification(){
+    let userRoles = this.tokenStorage.getAuthorities();
+
+    if(userRoles.indexOf('ROLE_ADMIN') !== -1 || userRoles.indexOf('ROLE_MODERATOR') !== -1){
+      this.error = false;
+      this.errorMessage = '';
+    }else{
+      this.errorMessage = "Доступ к запрошенному ресурсу запрещен";
+      this.error =  true;
+    }
+  }
 
   getUpdatedResponsible(id:number){
     this.responsibleService.updateResponsibleGet(id).subscribe(

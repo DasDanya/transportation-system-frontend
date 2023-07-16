@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Responsible } from 'src/app/responsible/responsible';
 import { WarehouseWithResponsibles } from '../warehouseWithResponsibles';
 import { Address } from 'src/app/address/address';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 
 @Component({
@@ -22,11 +23,24 @@ export class UpdateWarehouseComponent implements OnInit {
   warehouse:Warehouse;
   responsibles:Responsible[];
 
-  constructor(private warehouseService: WarehouseService, private route: ActivatedRoute, private router: Router){}
+  constructor(private warehouseService: WarehouseService, private route: ActivatedRoute, private router: Router,private tokenStorage:TokenStorageService){}
 
   ngOnInit(): void {
+      this.accessVerification();
       this.route.params.subscribe(params=> this.setStartData(params['id']))
       // this.searchResponsible();
+  }
+
+  accessVerification(){
+    let userRoles = this.tokenStorage.getAuthorities();
+
+    if(userRoles.indexOf('ROLE_ADMIN') !== -1 || userRoles.indexOf('ROLE_MODERATOR') !== -1){
+      this.error = false;
+      this.errorMessage = '';
+    }else{
+      this.errorMessage = "Доступ к запрошенному ресурсу запрещен";
+      this.error =  true;
+    }
   }
 
   setStartData(id:number){

@@ -20,7 +20,20 @@ export class DeleteWarehouseComponent implements OnInit {
   constructor(private warehouseService: WarehouseService, private route: ActivatedRoute, private router:Router,private tokenStorage: TokenStorageService){}
 
   ngOnInit(): void {
+    this.accessVerification();
     this.route.params.subscribe(params=> this.getWarehouse(params['id']))
+  }
+
+  private accessVerification(){
+    let userRoles = this.tokenStorage.getAuthorities();
+
+    if(userRoles.indexOf('ROLE_ADMIN') !== -1){
+      this.error = false;
+      this.errorMessage = '';
+    }else{
+      this.errorMessage = "Доступ к запрошенному ресурсу запрещен";
+      this.error =  true;
+    }
   }
 
   getWarehouse(id:number):void{
@@ -54,7 +67,8 @@ export class DeleteWarehouseComponent implements OnInit {
         this.router.navigate(["warehouse/all"]);
       },
       (error: HttpErrorResponse) => {
-        this.setError(error);
+        this.error = true;
+        this.errorMessage = "Ошибка удаления склада. Причиной ошибки может стать удаление склада, который связан с каким-то грузом";
       }
     )
   }
